@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block title %}Edit Course{% endblock %}
+
+{% block content %}
+    <h2>Edit Course: {{ course.title }}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }} 
+        <button type="submit">Update Course</button>
+    </form>
+        <a href="{% url 'delete_course' course.pk %}">Delete</a>
+    <hr>
+    <!-- Add and delete lessons -->
+    {% for lesson in lessons %}
+        <h3>{{ lesson.title }}</h3>
+        <a href="{% url 'edit_lesson' lesson.pk %}">Edit Lesson</a>
+        <a href="{% url 'delete_lesson' lesson.pk %}">Delete Lesson</a>
+        <hr>
+    {% endfor %}
+    <!-- Add new lesson -->
+    <a href="{% url 'add_lesson' course.pk %}">Add Lesson</a>
+
+
+    <a href="{% url 'author_courses' %}">Cancel</a>
+{% endblock content %}

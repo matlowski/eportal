@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+
+{% block title %}Lesson{% endblock %}
+
+{% block content %}
+
+    <h1>TITLE: {{ lesson.title }}</h1>
+    <p>{{ lesson.description }}</p>
+    <hr/>
+
+    <!-- Display Article, if available -->
+    {% if article %}
+        <h2>Article: <a href="{% url 'show_article' lesson.id lesson.course.id %}">{{ article.title }}</a></h2>
+    {% else %}
+        <p>No article for this lesson.</p>
+    {% endif %}
+
+    <!-- Display Quiz, if available -->
+    {% if quiz %}
+        <!-- if user is student -->
+        {% if request.user.role == "student" %}
+            <h2>Quiz: <a href="{% url 'submit_quiz' quiz.id %}">{{ quiz.title }}</a></h2>
+        {% else %}
+            <h2>Quiz: <a href="{% url 'show_quiz' lesson.id lesson.course.id %}">{{ quiz.title }}</a></h2>
+        {% endif %}
+    {% else %}
+        <p>No quiz for this lesson.</p>
+    {% endif %}
+
+    <hr/>
+    <!-- If author, edit buttons -->
+    {% if request.user == lesson.course.author %}
+        <a href="{% url 'edit_lesson' lesson.pk %}">Edit Lesson</a>
+        <a href="{% url 'delete_lesson' lesson.pk %}">Delete Lesson</a>
+    {% endif %}
+{% endblock content %}

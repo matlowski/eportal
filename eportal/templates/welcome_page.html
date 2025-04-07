@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+
+{% block title %}Welcome Page{% endblock %}
+
+{% block content %}
+    <h1>Welcome to the Welcome Page</h1>
+
+    <div class="button-group"></div>
+        <a href="{% url 'register' %}" class="btn">Create Account</a>
+        <a href="{% url 'reset_password' %}" class="btn">Forgotten Password</a>
+    </div>
+{% endblock %}
+
+

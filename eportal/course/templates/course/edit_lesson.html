@@ -1,0 +1,72 @@
+{% extends 'main.html' %}
+
+{% block title %}Edit Lesson{% endblock %}
+
+{% block extra_head %}
+    {{ article_form.media }}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .question-form, .answer-form {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .delete-question, .delete-answer {
+            color: red;
+            cursor: pointer;
+        }
+        .hidden-form-template {
+            display: none;
+        }
+    </style>
+{% endblock extra_head %}
+
+{% block content %}
+<h2>Edit Lesson: {{ lesson_form.instance.title }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    
+    <h3>Lesson Details</h3>
+    {{ lesson_form.as_p }}
+    
+    <h3>Article</h3>
+    {{ article_form.as_p }}
+
+    <h3>Quiz</h3>
+    {{ quiz_form.as_p }}
+    
+    <h3>Questions</h3>
+    <!-- for question in questions, display question number, text and answers -->
+    {% for question in questions %}
+        <div class="question-form">
+            <h4>Question {{ forloop.counter }}</h4>
+            {{ question.question_text }}
+            <!-- Edit and delete question buttons, redirecting to add_or_edit_question view -->
+            <a href="{% url 'edit_question' lesson.pk question.pk %}">Edit</a>
+            <a class="delete-question" href="{% url 'delete_question' lesson.pk question.pk %}">Delete</a>
+            {% for answer in question.answers.all %}
+                <div class="answer-form">
+                    <h5>Answer {{ forloop.counter }}</h5>
+                    {{ answer.answer_text }}
+                    {% if answer.is_correct %}
+                        <b>(Correct)</b>
+                    {% endif %}
+                    <!-- Edit and delete answer buttons, redirecting to add_or_edit_answer view -->
+                    <a href="{% url 'edit_answer' lesson.pk question.pk answer.pk %}">Edit</a>
+                    <a class="delete-answer" href="{% url 'delete_answer' lesson.pk answer.pk %}">Delete</a>
+                </div>
+            {% endfor %}
+            <!-- Add new answer button, redirecting to add_or_edit_answer view -->
+            <a href="{% url 'add_answer' lesson.pk question.pk %}">Add Answer</a>
+        </div>
+    {% endfor %}
+
+    <!-- Add new question button, redirecting to add_or_edit_question view -->
+    <a href="{% url 'add_question' lesson.pk %}">Add Question</a>
+
+    <br><br>
+    <input type="submit" value="Save Changes">
+</form>
+
+{% endblock content %}

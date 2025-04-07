@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+
+{% block title %}
+
+    {% if is_edit %} Edit Answer {% else %} Add Answer {% endif %}
+{% endblock %}
+
+{% block content %}
+<h2>
+    {{ lesson.title }}: 
+    
+    {% if is_edit %} Edit Answer {% else %} Add Answer {% endif %}
+</h2>
+<h3>
+    {{ question.question_text }}
+</h3>
+
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">
+        {% if is_edit %} Save Changes {% else %} Add Answer {% endif %}
+    </button>
+</form>
+
+<a href="{% url 'edit_lesson' lesson.pk %}">Back to Lesson</a>
+{% endblock %}

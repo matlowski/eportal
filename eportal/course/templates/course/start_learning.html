@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block title %}Start Learning{% endblock %}
+
+{% block content %}
+    {% for lesson in lessons %}
+        <div>
+            <h1>TITLE: {{ lesson.title }}</h1>
+            <h1>DESCRIPTION: {{ lesson.description }}</h1>
+            <a href="{% url 'show_article' lesson.id course.id %}">Article</a>
+            <a href="{% url 'submit_quiz' lesson.quiz.id %}">Quiz</a>
+            <hr/>
+        </div>
+    {% endfor %}
+{% endblock content %}

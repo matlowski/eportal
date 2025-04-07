@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<h1>REGISTER</h1>
+
+    <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Register"/>
+    </form>
+    <hr>
+        <small><a href="{% url 'welcome_page' %}">Back to homepage</a></small>
+
+    
+{% endblock content %}

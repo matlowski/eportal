@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+
+
+{% block title %}Quiz{% endblock %}
+
+{% block content %}
+    <h1>TITLE: {{ quiz.title }}</h1>
+    <hr/>
+    <!-- Display questions  -->
+    {% for question in questions %}
+        <h2>Question: {{ question.question_text }}</h2>
+        <!-- Display answers -->
+        {% for answer in question.answers.all %}
+            <p>{{ answer.answer_text }}
+            {% if user.role == "teacher" %}
+                {% if answer.is_correct %}
+                    <b>(Correct)</b>
+                {% endif %}
+            {% endif %}
+            </p>
+        {% endfor %}
+
+
+        <hr/>
+        <!-- back to lesson -->
+        <a href="{% url 'show_lesson' quiz.lesson.id %}">Back to Lesson</a>
+    {% endfor %}
+{% endblock content %}

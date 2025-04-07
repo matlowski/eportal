@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+
+{% block title %}Article{% endblock %}
+
+
+
+{% block content %}
+    <h1>TITLE: {{ article.title }}</h1>
+    <h1>CONTENT: </h1>
+    <div>
+        {{ article.content.html|safe }}
+    </div>
+    <hr/>
+    <!-- back to lesson -->
+    <a href="{% url 'show_lesson' article.lesson.id %}">Back to Lesson</a>
+{% endblock content %}

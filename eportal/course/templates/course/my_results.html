@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+
+{% block title %}My Results{% endblock %}
+
+{% block content %}
+    {% for result in results %}
+        <h1>Course: {{ result.quiz.lesson.course.title }}</h1>
+        <h2>Lesson: {{ result.quiz.lesson.title }}</h2>
+        <h2>Quiz: {{ result.quiz.title }}</h2>
+        <h2>Score: {{ result.score }} / {{ result.total }}</h2>
+        <h2>Date: {{ result.created }}</h2>
+        <hr/>
+    {% endfor %}
+{% endblock content %}

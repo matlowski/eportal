@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block title %}dashboard - nauczyciel{% endblock %}
+
+{% block content %}
+    {% for course in courses %}
+        <div>
+            <h1>TITLE: {{ course.title }}</h1>
+            <h1>AUTHOR: {{ course.author }}</h1>
+            <p>
+                <a href="{% url 'course_detail' course.id %}">Show Detail</a>
+            </p>
+            {% if course.author == request.user %}    
+                <p>
+                    <a href="{% url 'edit_course' course.id %}">Edit Course</a>
+                </p>
+            {% endif %}
+            <hr>
+        </div>
+    {% endfor %}
+{% endblock content %}

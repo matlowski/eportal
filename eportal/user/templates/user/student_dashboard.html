@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% block title %}dashboard - student{% endblock %}
+{% block content %}
+    {% for course in courses %}
+        <div>
+            <h1>TITLE: {{ course.title }}</h1>
+            <h1>AUTHOR: {{ course.author }}</h1>
+            <a href="{% url 'course_detail' course.id %}">Show Detail</a>
+            <a href="{% url 'start_learning' course.id %}">Join</a>
+            <hr>
+        </div>
+    {% endfor %}
+{% endblock content %}

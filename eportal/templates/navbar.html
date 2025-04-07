@@ -1,0 +1,14 @@
+<!-- templates/navbar.html -->
+{% load static %}
+<nav class="navbar">
+    <div class="logo">
+        <a href="{% url 'welcome_page' %}">
+            <img src="{% static 'images/logo.png' %}" alt="Temporary Logo" class="logo-img">
+        </a>
+    </div>
+    <ul class="nav-links">
+        {% for link in nav_links %}
+            <li><a href="{% url link.url %}">{{ link.name }}</a></li>
+        {% endfor %}
+    </ul>
+</nav>

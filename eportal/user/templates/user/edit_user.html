@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+    <h1>To jest update profilu</h1>
+
+    <form method="POST" action="{% url 'edit_user' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" />    
+    </form>
+{% endblock content %}

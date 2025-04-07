@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block title %}Submit Quiz{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <h2>{{ quiz.title }}</h2>
+        {% for question in questions %}
+            <h3>{{ question.question_text }}</h3>
+            {% for answer in question.answers.all %}
+                <input type="checkbox" name="question_{{ question.id }}" value="{{ answer.id }}">{{ answer.answer_text }}<br>
+            {% endfor %}
+        {% endfor %}
+        <button type="submit">Submit Quiz</button>
+    </form>
+{% endblock content %}
