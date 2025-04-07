@@ -21,7 +21,7 @@ All e-portal functionalities include:
 To learn how the e-portal works, first clone this repository and then use one of the two accounts designed for exploration:
 * Student account:
   * login: matlowski
-  * hasło: matlowski
+  * password: matlowski
 * Teacher account:
   * login: newTeacher
-  * hasło: user123user
+  * password: user123user
